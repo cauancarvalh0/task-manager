@@ -1,0 +1,14 @@
+config/database.php
+.env
+.env.*
+*.bak
+*.dump
+backup*.sql
+*.log
+error_log
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+vendor/
+node_modules/
