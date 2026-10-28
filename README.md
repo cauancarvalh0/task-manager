@@ -32,7 +32,7 @@ O projeto foi construído **sem frameworks**, para demonstrar domínio dos funda
 
 | | |
 |---|---|
-| **Aplicação no ar** | [COLE-AQUI-O-LINK-DO-SEU-SITE](https://COLE-AQUI-O-LINK-DO-SEU-SITE) |
+| **Aplicação no ar** | (https://task-manager-php.infinityfree.io) |
 | **Hospedagem** | InfinityFree (nuvem gratuita), com HTTPS ativo |
 | **Acesso** | O cadastro é livre. Clique em **Cadastre-se** e crie uma conta de teste. |
 
