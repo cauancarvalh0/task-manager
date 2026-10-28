@@ -1,73 +1,100 @@
-# Task Manager
+<div align="center">
 
-Sistema web de gerenciamento de tarefas com cadastro e login de usuários, desenvolvido em **PHP puro** (sem frameworks), **MySQL com PDO** e **Bootstrap 5**. Cada usuário tem seu próprio painel e enxerga somente as tarefas que criou.
+# ✅ Task Manager
 
-[![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?logo=php&logoColor=white)](https://www.php.net/)
-[![MySQL](https://img.shields.io/badge/MySQL-PDO-4479A1?logo=mysql&logoColor=white)](https://www.mysql.com/)
-[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
-[![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
+**Gerenciador de tarefas multiusuário com autenticação segura, desenvolvido em PHP puro.**
 
-**🔗 Demonstração online:**(https://task-manager-php.infinityfree.io))
-*(o cadastro é livre: crie uma conta de teste na tela "Cadastre-se")*
+[![PHP](https://img.shields.io/badge/PHP-8.x-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://www.php.net/)
+[![MySQL](https://img.shields.io/badge/MySQL-PDO-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
+[![Git](https://img.shields.io/badge/Git-GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)
+
+[**🔗 Ver demonstração online**](https://task-manager-php.infinityfree.io)
+
+</div>
 
 ---
 
-## Sobre o projeto
+## 📌 Sobre o projeto
 
-O objetivo é demonstrar, de ponta a ponta, os fundamentos de uma aplicação web back-end: autenticação com sessões, criptografia de senhas, CRUD relacional, isolamento de dados por usuário e boas práticas de segurança, em uma estrutura simples e organizada. A interface segue um visual corporativo, limpo e responsivo (mobile-first).
+O **Task Manager** é uma aplicação web para organizar tarefas pessoais ou de trabalho. Cada usuário cria sua conta, acessa um painel privado e controla o que está pendente e o que já foi concluído, com prioridades e indicadores de progresso.
 
-## Funcionalidades
+O projeto foi construído **sem frameworks**, para demonstrar domínio dos fundamentos do back-end: autenticação, sessões, acesso a banco de dados com PDO, validação de dados e práticas de segurança aplicadas de verdade, e não apenas listadas.
 
-- Cadastro de usuários com validação no cliente e no servidor
-- Login e logout com sessões PHP
-- Painel protegido por autenticação
-- Resumo com total de tarefas, pendentes, concluídas e barra de progresso
-- Criar, editar, listar e excluir tarefas
-- Alternar status (pendente / concluída) com um clique
-- Prioridade alta, média e baixa, com ordenação automática
-- Filtro por status (todas, pendentes, concluídas)
-- Confirmação em modal antes de excluir
-- Mensagens de feedback (flash) após cada ação
-- Layout responsivo, pensado primeiro para o celular
+### O que ele resolve
 
-## Tecnologias
+- Centraliza as tarefas em um painel claro, com resumo e barra de progresso.
+- Mantém os dados de cada usuário **isolados**: ninguém acessa as tarefas de outra pessoa.
+- Oferece uma interface limpa, responsiva e pensada primeiro para o celular.
 
-| Tecnologia | Uso |
+## 🚀 Demonstração
+
+| | |
 |---|---|
-| **PHP 8+** | Back-end, sessões e regras de negócio |
-| **MySQL + PDO** | Banco de dados com prepared statements |
-| **HTML5 / CSS3** | Estrutura e estilo (tema próprio com variáveis CSS) |
-| **Bootstrap 5.3** | Grid, componentes e responsividade |
-| **Bootstrap Icons** | Ícones |
-| **JavaScript (vanilla)** | Validações, modal de confirmação e pequenas melhorias de UX |
-| **Git / GitHub** | Versionamento |
-| **InfinityFree** | Hospedagem da demonstração |
+| **Aplicação no ar** | [COLE-AQUI-O-LINK-DO-SEU-SITE](https://COLE-AQUI-O-LINK-DO-SEU-SITE) |
+| **Hospedagem** | InfinityFree (nuvem gratuita), com HTTPS ativo |
+| **Acesso** | O cadastro é livre. Clique em **Cadastre-se** e crie uma conta de teste. |
 
-## Segurança aplicada
+## ✨ Principais funcionalidades
 
-- **SQL Injection:** todas as consultas usam *prepared statements* do PDO.
-- **Senhas:** `password_hash()` no cadastro e `password_verify()` no login. Nenhuma senha é salva em texto puro.
-- **XSS:** toda saída dinâmica passa por `htmlspecialchars()` (função `e()`).
-- **CSRF:** token por sessão em todos os formulários `POST`, validado com `hash_equals()`.
-- **Session fixation:** `session_regenerate_id(true)` após o login.
-- **Cookie de sessão:** `HttpOnly`, `SameSite=Lax` e `Secure` quando o site usa HTTPS.
-- **Autorização:** toda leitura, edição e exclusão filtra por `user_id` da sessão. Um usuário nunca acessa tarefas de outro.
-- **Rotas privadas:** `exigir_login()` bloqueia o acesso sem sessão; o logout só funciona via `POST` com token.
-- **Mensagens de login genéricas:** não revelam se o e-mail existe.
-- **Cabeçalhos HTTP:** `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` e `Cache-Control`.
-- **Credenciais fora do repositório:** `config/database.php` está no `.gitignore`.
+- **Autenticação completa:** cadastro, login e logout com sessões PHP.
+- **Painel protegido:** páginas privadas exigem login.
+- **CRUD de tarefas:** criar, listar, editar e excluir, com confirmação antes de apagar.
+- **Prioridades:** alta, média e baixa, com ordenação automática.
+- **Status em um clique:** alternar entre pendente e concluída.
+- **Filtros e indicadores:** total, pendentes, concluídas e porcentagem de progresso.
+- **Feedback ao usuário:** mensagens de sucesso e erro após cada ação.
+- **Interface corporativa e responsiva:** layout limpo em branco, preto e bege, otimizado para telas pequenas.
 
-## Estrutura de pastas
+## 🔐 Segurança
+
+A segurança foi tratada como requisito, não como detalhe:
+
+| Ameaça | Proteção aplicada |
+|---|---|
+| **SQL Injection** | Todas as consultas usam *prepared statements* do PDO |
+| **Senhas vazadas** | `password_hash()` no cadastro e `password_verify()` no login; nenhuma senha é salva em texto puro |
+| **Session fixation** | `session_regenerate_id(true)` a cada login |
+| **Roubo de sessão** | Cookie com `HttpOnly`, `SameSite=Lax` e `Secure` em HTTPS |
+| **CSRF** | Token único por sessão em todos os formulários `POST`, validado com `hash_equals()` |
+| **XSS** | Toda saída dinâmica é escapada com `htmlspecialchars()` |
+| **Acesso indevido a dados** | Toda consulta filtra pelo `user_id` da sessão |
+| **Enumeração de contas** | Mensagem de login genérica, que não revela se o e-mail existe |
+| **Vazamento de credenciais** | `config/database.php` fora do repositório via `.gitignore` |
+| **Cache de páginas privadas** | Cabeçalhos `Cache-Control` impedem ver o painel pelo botão "voltar" após sair |
+
+A validação dos formulários acontece no navegador **e** no servidor.
+
+## 🛠️ Tecnologias utilizadas
+
+| Camada | Tecnologia |
+|---|---|
+| **Back-end** | PHP 8+ (sem frameworks) |
+| **Banco de dados** | MySQL com PDO |
+| **Front-end** | HTML5, CSS3 (variáveis CSS) e Bootstrap 5.3 |
+| **Interatividade** | JavaScript puro (validações, modal de confirmação, UX) |
+| **Ícones e fonte** | Bootstrap Icons e Inter |
+| **Versionamento** | Git e GitHub |
+| **Hospedagem** | InfinityFree |
+
+## 📱 Desenvolvido e publicado pelo celular
+
+Este projeto foi **inteiramente desenvolvido, versionado e publicado a partir de um smartphone**: código, banco de dados, deploy na InfinityFree e repositório no GitHub, sem depender de um computador.
+
+Isso exigiu organização, atenção aos detalhes e autonomia para resolver problemas de ambiente, e é parte importante da minha forma de trabalhar.
+
+## 🗂️ Estrutura do projeto
 
 ```
 task-manager/
 ├── assets/
-│   ├── css/style.css            # Tema visual (branco, preto e bege)
-│   └── js/validation.js         # Validações e interações em JS puro
+│   ├── css/style.css            # Tema visual do projeto
+│   └── js/validation.js         # Validações e interações em JavaScript
 ├── config/
-│   └── database.example.php     # Modelo da conexão PDO (copie para database.php)
+│   └── database.example.php     # Modelo da conexão (copie para database.php)
 ├── includes/
-│   ├── auth.php                 # Sessão, CSRF, flash e proteção de rotas
+│   ├── auth.php                 # Sessão, CSRF, flash messages e proteção de rotas
 │   ├── header.php               # Cabeçalho e navegação
 │   └── footer.php               # Rodapé, modal e scripts
 ├── tasks/
@@ -80,12 +107,11 @@ task-manager/
 ├── register.php                 # Cadastro
 ├── logout.php                   # Encerrar sessão
 ├── index.php                    # Redireciona para login ou painel
-├── database.sql                 # Criação das tabelas
-├── .gitignore
+├── database.sql                 # Estrutura das tabelas
 └── README.md
 ```
 
-## Modelo de dados
+### Modelo de dados
 
 ```
 usuarios (1) ───────< (N) tarefas
@@ -98,51 +124,83 @@ usuarios (1) ───────< (N) tarefas
                           data_criacao
 ```
 
-## Como executar localmente
+## ⚙️ Instalação e execução local
 
-**Pré-requisitos:** PHP 8+, MySQL/MariaDB e um servidor local (XAMPP, Laragon ou similar).
+### Pré-requisitos
 
-1. **Clone o repositório** dentro da pasta pública do servidor (`htdocs` no XAMPP):
-   ```bash
-   git clone https://github.com/cauancarvalh0/task-manager.git
-   ```
-2. **Crie o banco de dados** no phpMyAdmin (por exemplo, `db_tarefas`, com collation `utf8mb4_unicode_ci`).
-3. **Importe as tabelas:** selecione o banco, abra a aba *Importar* e envie o arquivo `database.sql`.
-4. **Configure a conexão:** copie `config/database.example.php` para `config/database.php` e preencha `host`, `banco`, `usuario` e `senha`.
-5. **Acesse** `http://localhost/task-manager` e crie sua conta.
+- [XAMPP](https://www.apachefriends.org/) (ou Laragon/WAMP), com **PHP 8+**, Apache e MySQL
+- [Git](https://git-scm.com/)
 
-## Como publicar no InfinityFree
+### Passo a passo
 
-1. No painel da InfinityFree, crie um banco em **MySQL Databases** e anote host, nome, usuário e senha.
-2. Abra o **phpMyAdmin** do banco criado e importe o `database.sql`.
-3. Envie os arquivos do projeto para a pasta `htdocs` (gerenciador de arquivos ou FTP).
-4. Crie manualmente `htdocs/config/database.php` com os dados do passo 1.
-5. Apague o arquivo de boas-vindas da hospedagem (`index2.html`), se existir.
-6. Para forçar HTTPS, crie um `.htaccess` dentro de `htdocs` com:
-   ```apache
-   RewriteEngine On
-   RewriteCond %{HTTPS} off
-   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-   ```
+**1. Clone o repositório** dentro da pasta `htdocs` do XAMPP:
 
-## Melhorias futuras
+```bash
+cd C:/xampp/htdocs
+git clone https://github.com/cauancarvalh0/task-manager.git
+```
+
+**2. Inicie o Apache e o MySQL** no painel do XAMPP.
+
+**3. Crie o banco de dados.** Abra `http://localhost/phpmyadmin`, clique em **Novo** e crie um banco chamado `db_tarefas` com collation `utf8mb4_unicode_ci`.
+
+**4. Importe as tabelas.** Selecione o banco `db_tarefas`, vá em **Importar** e envie o arquivo `database.sql`.
+
+**5. Configure a conexão.** Copie o arquivo de exemplo e preencha com os seus dados:
+
+```bash
+cp config/database.example.php config/database.php
+```
+
+No XAMPP, os valores padrão costumam ser:
+
+```php
+$host    = 'localhost';
+$banco   = 'db_tarefas';
+$usuario = 'root';
+$senha   = '';
+```
+
+**6. Acesse** `http://localhost/task-manager` e crie sua conta.
+
+> ⚠️ O arquivo `config/database.php` contém credenciais e **nunca deve ser enviado ao GitHub**. Ele já está protegido pelo `.gitignore`.
+
+## ☁️ Publicação na InfinityFree
+
+1. Em **MySQL Databases**, crie um banco e anote host, nome, usuário e senha.
+2. No **phpMyAdmin** desse banco, importe o `database.sql`.
+3. Envie os arquivos para a pasta `htdocs` da hospedagem.
+4. Crie `htdocs/config/database.php` com os dados do passo 1.
+5. Remova o arquivo de boas-vindas da hospedagem (`index2.html`), se existir.
+6. Para forçar HTTPS, crie um `.htaccess` dentro de `htdocs`:
+
+```apache
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+```
+
+## 🗺️ Próximos passos
 
 - [ ] Limite de tentativas de login (proteção contra força bruta)
 - [ ] Recuperação de senha por e-mail
 - [ ] Data de vencimento e lembretes
 - [ ] Busca e paginação de tarefas
-- [ ] Categorias ou etiquetas
+- [ ] Categorias e etiquetas
 - [ ] Testes automatizados
 
-## Autor
+## 👨‍💻 Autor
 
-**Cauan Carvalho**, desenvolvedor web em formação, de Caxias, MA.
+<div align="center">
 
-- GitHub: [@cauancarvalh0](https://github.com/cauancarvalh0)
-- LinkedIn: [cauancarvalho0](https://www.linkedin.com/in/cauancarvalho0)
-- Portfólio: [cauancarvalho.vercel.app](https://cauancarvalho.vercel.app)
-- E-mail: cauancarvalho004@gmail.com
+**Cauan Carvalho**
+Desenvolvedor web em formação · Caxias, MA
 
----
+[![GitHub](https://img.shields.io/badge/GitHub-cauancarvalh0-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/cauancarvalh0)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-cauancarvalho0-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/cauancarvalho0)
+[![Portfólio](https://img.shields.io/badge/Portf%C3%B3lio-cauancarvalho.vercel.app-111111?style=for-the-badge&logo=vercel&logoColor=white)](https://cauancarvalho.vercel.app)
+[![E-mail](https://img.shields.io/badge/E--mail-cauancarvalho004%40gmail.com-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:cauancarvalho004@gmail.com)
 
-Projeto desenvolvido para fins de estudo e portfólio.
+*Projeto desenvolvido para estudo e portfólio.*
+
+</div>
