@@ -7,7 +7,7 @@ Sistema web de gerenciamento de tarefas com cadastro e login de usuários, desen
 [![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-Vanilla-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
 
-**🔗 Demonstração online:**(https://dash.infinityfree.com/accounts/if0_43288943/domains/task-manager-php.infinityfree.io)
+**🔗 Demonstração online:**(https://task-manager-php.infinityfree.io))
 *(o cadastro é livre: crie uma conta de teste na tela "Cadastre-se")*
 
 ---
