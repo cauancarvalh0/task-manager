@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $senha     = $_POST['senha'] ?? '';
     $confirmar = $_POST['confirmar_senha'] ?? '';
 
-    // Validação no servidor (a do navegador pode ser contornada)
+    // Validação no servidor (a do navegador pode ser ignorada por quem quiser)
     if ($nome === '' || mb_strlen($nome) > 100) {
         $erros[] = 'Informe um nome com até 100 caracteres.';
     }
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($stmt->fetch()) {
                 $erros[] = 'Este e-mail já está cadastrado.';
             } else {
-                // password_hash gera um hash seguro com salt automático
+                // password_hash gera o hash da senha (a senha nunca é salva em texto puro)
                 $hash = password_hash($senha, PASSWORD_DEFAULT);
 
                 $stmt = $pdo->prepare(
@@ -61,70 +61,89 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-$layout = 'auth';
-$tituloPagina = 'Criar conta';
+$tituloPagina  = 'Criar conta';
+$heroTitulo    = 'Crie sua conta';
+$heroSub       = 'Leva menos de um minuto. Suas tarefas ficam visíveis só para você.';
+$authLinkUrl   = 'login.php';
+$authLinkTexto = 'Entrar';
 require __DIR__ . '/includes/header.php';
 ?>
 
-<div class="auth-card">
-    <h1 class="auth-title">Criar sua conta</h1>
-    <p class="auth-sub">Leva menos de um minuto. Suas tarefas ficam visíveis só para você.</p>
+<div class="row justify-content-center sobe">
+    <div class="col-12 col-md-8 col-lg-5">
+        <div class="card">
+            <div class="card-body p-4">
+                <h2 class="h4 mb-1">Criar sua conta</h2>
+                <p class="text-muted mb-4">Preencha os dados abaixo.</p>
 
-    <?php if ($erros): ?>
-        <div class="alert alert-danger py-2" role="alert">
-            <ul class="mb-0 ps-3">
-                <?php foreach ($erros as $erro): ?>
-                    <li><?= e($erro) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    <?php endif; ?>
+                <?php if ($erros): ?>
+                    <div class="alert alert-danger" role="alert">
+                        <ul class="mb-0 ps-3">
+                            <?php foreach ($erros as $erro): ?>
+                                <li><?= e($erro) ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                <?php endif; ?>
 
-    <form method="POST" class="needs-validation" novalidate>
-        <?= csrf_campo() ?>
+                <form method="POST" class="needs-validation" novalidate>
+                    <?= csrf_campo() ?>
 
-        <div class="mb-3">
-            <label for="nome" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="nome" name="nome"
-                   autocomplete="name" maxlength="100" placeholder="Seu nome completo"
-                   required autofocus value="<?= e($nome) ?>">
-            <div class="invalid-feedback">Informe seu nome.</div>
-        </div>
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Nome</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control" id="nome" name="nome"
+                                   maxlength="100" placeholder="Seu nome completo" required autofocus
+                                   value="<?= e($nome) ?>">
+                            <div class="invalid-feedback">Informe seu nome.</div>
+                        </div>
+                    </div>
 
-        <div class="mb-3">
-            <label for="email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="email" name="email"
-                   autocomplete="username" inputmode="email" maxlength="150"
-                   placeholder="voce@empresa.com" required value="<?= e($email) ?>">
-            <div class="invalid-feedback">Informe um e-mail válido.</div>
-        </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">E-mail</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                            <input type="email" class="form-control" id="email" name="email"
+                                   maxlength="150" placeholder="voce@empresa.com" required
+                                   value="<?= e($email) ?>">
+                            <div class="invalid-feedback">Informe um e-mail válido.</div>
+                        </div>
+                    </div>
 
-        <div class="mb-3">
-            <label for="senha" class="form-label">Senha</label>
-            <div class="input-group has-validation">
-                <input type="password" class="form-control" id="senha" name="senha"
-                       autocomplete="new-password" minlength="8" placeholder="Mínimo de 8 caracteres" required>
-                <button type="button" class="btn btn-outline-dark btn-toggle-senha"
-                        data-toggle-senha="#senha" aria-label="Mostrar senha">
-                    <i class="bi bi-eye"></i>
-                </button>
-                <div class="invalid-feedback">Mínimo de 8 caracteres.</div>
+                    <div class="mb-3">
+                        <label for="senha" class="form-label">Senha</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="password" class="form-control" id="senha" name="senha"
+                                   minlength="8" placeholder="Mínimo de 8 caracteres" required>
+                            <button type="button" class="btn btn-outline-secondary btn-toggle-senha"
+                                    data-alvo="#senha" aria-label="Mostrar senha">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                            <div class="invalid-feedback">A senha precisa ter no mínimo 8 caracteres.</div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="confirmar_senha" class="form-label">Confirmar senha</label>
+                        <div class="input-group has-validation">
+                            <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
+                            <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha"
+                                   placeholder="Repita a senha" required>
+                            <div class="invalid-feedback">As senhas precisam ser iguais.</div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-lg w-100">Criar conta</button>
+                </form>
             </div>
         </div>
 
-        <div class="mb-4">
-            <label for="confirmar_senha" class="form-label">Confirmar senha</label>
-            <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha"
-                   autocomplete="new-password" placeholder="Repita a senha" required>
-            <div class="invalid-feedback">As senhas precisam ser iguais.</div>
-        </div>
-
-        <button type="submit" class="btn btn-primary btn-lg w-100">Criar conta</button>
-    </form>
-
-    <p class="auth-alt">
-        Já tem conta? <a href="login.php" class="auth-link">Entrar</a>
-    </p>
+        <p class="text-center text-muted mt-4">
+            Já tem conta? <a href="login.php" class="fw-semibold">Entrar</a>
+        </p>
+    </div>
 </div>
 
 <?php require __DIR__ . '/includes/footer.php'; ?>

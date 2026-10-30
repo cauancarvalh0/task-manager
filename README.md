@@ -10,7 +10,7 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
 [![Git](https://img.shields.io/badge/Git-GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)
 
-[**🔗 Ver demonstração online**](https://task-manager-php.infinityfree.io)
+[**🔗 Ver demonstração online**](https://COLE-AQUI-O-LINK-DO-SEU-SITE)
 
 </div>
 
@@ -32,7 +32,7 @@ O projeto foi construído **sem frameworks**, para demonstrar domínio dos funda
 
 | | |
 |---|---|
-| **Aplicação no ar** | (https://task-manager-php.infinityfree.io) |
+| **Aplicação no ar** | [COLE-AQUI-O-LINK-DO-SEU-SITE](https://COLE-AQUI-O-LINK-DO-SEU-SITE) |
 | **Hospedagem** | InfinityFree (nuvem gratuita), com HTTPS ativo |
 | **Acesso** | O cadastro é livre. Clique em **Cadastre-se** e crie uma conta de teste. |
 
@@ -45,7 +45,7 @@ O projeto foi construído **sem frameworks**, para demonstrar domínio dos funda
 - **Status em um clique:** alternar entre pendente e concluída.
 - **Filtros e indicadores:** total, pendentes, concluídas e porcentagem de progresso.
 - **Feedback ao usuário:** mensagens de sucesso e erro após cada ação.
-- **Interface corporativa e responsiva:** layout limpo em branco, preto e bege, otimizado para telas pequenas.
+- **Interface corporativa e responsiva:** layout em tons de azul, branco e cinza, com cartões, selos de prioridade e uso confortável no celular.
 
 ## 🔐 Segurança
 
@@ -60,9 +60,9 @@ A segurança foi tratada como requisito, não como detalhe:
 | **CSRF** | Token único por sessão em todos os formulários `POST`, validado com `hash_equals()` |
 | **XSS** | Toda saída dinâmica é escapada com `htmlspecialchars()` |
 | **Acesso indevido a dados** | Toda consulta filtra pelo `user_id` da sessão |
+| **Tentativas de login em excesso** | Após 3 senhas erradas, o login é bloqueado por alguns minutos (contador na sessão) |
 | **Enumeração de contas** | Mensagem de login genérica, que não revela se o e-mail existe |
 | **Vazamento de credenciais** | `config/database.php` fora do repositório via `.gitignore` |
-| **Cache de páginas privadas** | Cabeçalhos `Cache-Control` impedem ver o painel pelo botão "voltar" após sair |
 
 A validação dos formulários acontece no navegador **e** no servidor.
 
@@ -73,8 +73,8 @@ A validação dos formulários acontece no navegador **e** no servidor.
 | **Back-end** | PHP 8+ (sem frameworks) |
 | **Banco de dados** | MySQL com PDO |
 | **Front-end** | HTML5, CSS3 (variáveis CSS) e Bootstrap 5.3 |
-| **Interatividade** | JavaScript puro (validações, modal de confirmação, UX) |
-| **Ícones e fonte** | Bootstrap Icons e Inter |
+| **Interatividade** | JavaScript puro (validação dos formulários e botão de mostrar a senha) |
+| **Ícones e fonte** | Bootstrap Icons e Open Sans |
 | **Versionamento** | Git e GitHub |
 | **Hospedagem** | InfinityFree |
 
@@ -90,13 +90,13 @@ Isso exigiu organização, atenção aos detalhes e autonomia para resolver prob
 task-manager/
 ├── assets/
 │   ├── css/style.css            # Tema visual do projeto
-│   └── js/validation.js         # Validações e interações em JavaScript
+│   └── js/script.js             # Validação dos formulários e botão de senha
 ├── config/
 │   └── database.example.php     # Modelo da conexão (copie para database.php)
 ├── includes/
 │   ├── auth.php                 # Sessão, CSRF, flash messages e proteção de rotas
-│   ├── header.php               # Cabeçalho e navegação
-│   └── footer.php               # Rodapé, modal e scripts
+│   ├── header.php               # Topo, faixa azul e navegação
+│   └── footer.php               # Rodapé e scripts
 ├── tasks/
 │   ├── create.php               # Criar tarefa
 │   ├── edit.php                 # Editar tarefa
@@ -182,7 +182,7 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 ## 🗺️ Próximos passos
 
-- [ ] Limite de tentativas de login (proteção contra força bruta)
+- [ ] Limite de tentativas por e-mail/IP salvo no banco (hoje o contador fica na sessão)
 - [ ] Recuperação de senha por e-mail
 - [ ] Data de vencimento e lembretes
 - [ ] Busca e paginação de tarefas
