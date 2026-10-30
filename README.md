@@ -1,6 +1,6 @@
 <div align="center">
 
-# ✅ Task Manager
+# Task Manager
 
 **Gerenciador de tarefas multiusuário com autenticação segura, desenvolvido em PHP puro.**
 
@@ -10,13 +10,13 @@
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/docs/Web/JavaScript)
 [![Git](https://img.shields.io/badge/Git-GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/)
 
-[**🔗 Ver demonstração online**](https://COLE-AQUI-O-LINK-DO-SEU-SITE)
+[**🔗 Ver demonstração online**](https://task-manager-php.infinityfree.io)
 
 </div>
 
 ---
 
-## 📌 Sobre o projeto
+## Sobre o projeto
 
 O **Task Manager** é uma aplicação web para organizar tarefas pessoais ou de trabalho. Cada usuário cria sua conta, acessa um painel privado e controla o que está pendente e o que já foi concluído, com prioridades e indicadores de progresso.
 
@@ -28,15 +28,15 @@ O projeto foi construído **sem frameworks**, para demonstrar domínio dos funda
 - Mantém os dados de cada usuário **isolados**: ninguém acessa as tarefas de outra pessoa.
 - Oferece uma interface limpa, responsiva e pensada primeiro para o celular.
 
-## 🚀 Demonstração
+## Demonstração
 
 | | |
 |---|---|
-| **Aplicação no ar** | [COLE-AQUI-O-LINK-DO-SEU-SITE](https://COLE-AQUI-O-LINK-DO-SEU-SITE) |
+| **Aplicação no ar** | [Task Manager](https://task-manager-php.infinityfree.io) |
 | **Hospedagem** | InfinityFree (nuvem gratuita), com HTTPS ativo |
 | **Acesso** | O cadastro é livre. Clique em **Cadastre-se** e crie uma conta de teste. |
 
-## ✨ Principais funcionalidades
+## Principais funcionalidades
 
 - **Autenticação completa:** cadastro, login e logout com sessões PHP.
 - **Painel protegido:** páginas privadas exigem login.
@@ -45,9 +45,9 @@ O projeto foi construído **sem frameworks**, para demonstrar domínio dos funda
 - **Status em um clique:** alternar entre pendente e concluída.
 - **Filtros e indicadores:** total, pendentes, concluídas e porcentagem de progresso.
 - **Feedback ao usuário:** mensagens de sucesso e erro após cada ação.
-- **Interface corporativa e responsiva:** layout em tons de azul, branco e cinza, com cartões, selos de prioridade e uso confortável no celular.
+- **Interface corporativa e responsiva:** layout em tons de azul, branco e cinza, comfortável no celular.
 
-## 🔐 Segurança
+## Segurança
 
 A segurança foi tratada como requisito, não como detalhe:
 
@@ -66,7 +66,7 @@ A segurança foi tratada como requisito, não como detalhe:
 
 A validação dos formulários acontece no navegador **e** no servidor.
 
-## 🛠️ Tecnologias utilizadas
+## Tecnologias utilizadas
 
 | Camada | Tecnologia |
 |---|---|
@@ -78,13 +78,13 @@ A validação dos formulários acontece no navegador **e** no servidor.
 | **Versionamento** | Git e GitHub |
 | **Hospedagem** | InfinityFree |
 
-## 📱 Desenvolvido e publicado pelo celular
+## Desenvolvido e publicado pelo celular
 
 Este projeto foi **inteiramente desenvolvido, versionado e publicado a partir de um smartphone**: código, banco de dados, deploy na InfinityFree e repositório no GitHub, sem depender de um computador.
 
 Isso exigiu organização, atenção aos detalhes e autonomia para resolver problemas de ambiente, e é parte importante da minha forma de trabalhar.
 
-## 🗂️ Estrutura do projeto
+## Estrutura do projeto
 
 ```
 task-manager/
@@ -189,7 +189,7 @@ RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 - [ ] Categorias e etiquetas
 - [ ] Testes automatizados
 
-## 👨‍💻 Autor
+## Autor
 
 <div align="center">
 
