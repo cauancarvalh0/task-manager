@@ -9,14 +9,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 csrf_validar();
 
-$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+$id = (int) ($_POST['id'] ?? 0);
 
-if ($id) {
+if ($id > 0) {
     try {
-        // A cláusula user_id garante que só o dono altere a própria tarefa
+        // Troca pendente por concluída (e vice-versa).
+        // O user_id garante que só o dono altera a própria tarefa.
         $stmt = $pdo->prepare(
             "UPDATE tarefas
-                SET status = IF(status = 'pendente', 'concluida', 'pendente')
+                SET status = CASE WHEN status = 'pendente' THEN 'concluida' ELSE 'pendente' END
               WHERE id = :id AND user_id = :uid"
         );
         $stmt->execute([':id' => $id, ':uid' => $_SESSION['usuario_id']]);

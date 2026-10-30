@@ -9,14 +9,15 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 csrf_validar();
 
-$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT, ['options' => ['min_range' => 1]]);
+$id = (int) ($_POST['id'] ?? 0);
 
-if ($id) {
+if ($id > 0) {
     try {
-        // Exclusão restrita ao dono da tarefa (id + user_id)
+        // Só exclui se a tarefa for do usuário logado (id + user_id)
         $stmt = $pdo->prepare('DELETE FROM tarefas WHERE id = :id AND user_id = :uid');
         $stmt->execute([':id' => $id, ':uid' => $_SESSION['usuario_id']]);
 
+        // rowCount() diz quantas linhas foram apagadas
         if ($stmt->rowCount() > 0) {
             definir_flash('success', 'Tarefa excluída.');
         }

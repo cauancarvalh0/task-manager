@@ -4,6 +4,7 @@ require_once __DIR__ . '/../config/database.php';
 
 exigir_login('../');
 
+// Esta página só aceita o envio do formulário (POST)
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     redirecionar('../dashboard.php');
 }
