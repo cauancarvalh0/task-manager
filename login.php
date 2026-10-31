@@ -9,13 +9,10 @@ if (isset($_GET['saiu'])) {
     definir_flash('info', 'Você saiu da sua conta.');
 }
 
-$maxTentativas   = 3;  // erros de senha permitidos
-$minutosBloqueio = 5;  // tempo de espera depois de errar demais
-
-// O contador de erros fica guardado na sessão
-if (!isset($_SESSION['tentativas'])) {
-    $_SESSION['tentativas'] = 0;
-}
+// Limite de tentativas: 3 erros bloqueiam o login por 5 minutos.
+// O contador fica guardado na sessão do visitante.
+$maxTentativas   = 3;
+$minutosBloqueio = 5;
 
 // Se o tempo de bloqueio já passou, libera e zera o contador
 if (isset($_SESSION['bloqueado_ate']) && time() >= $_SESSION['bloqueado_ate']) {
@@ -29,9 +26,10 @@ $email = '';
 
 if ($bloqueado) {
     $minutosRestantes = ceil(($_SESSION['bloqueado_ate'] - time()) / 60);
-    $erro = 'Excedeu o número de tentativas. Tente novamente em ' . $minutosRestantes . ' minuto(s).';
+    $erro = 'Muitas tentativas. Tente novamente em ' . $minutosRestantes . ' minuto(s).';
 }
 
+// Enquanto estiver bloqueado, nem tenta verificar a senha
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$bloqueado) {
     csrf_validar();
 
@@ -54,19 +52,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !$bloqueado) {
 
                 $_SESSION['usuario_id']   = (int) $usuario['id'];
                 $_SESSION['usuario_nome'] = $usuario['nome'];
-                $_SESSION['tentativas']   = 0; // acertou: zera o contador
+                unset($_SESSION['tentativas']); // acertou: zera o contador
 
                 redirecionar('dashboard.php');
             }
 
-            // Errou: conta a tentativa
-            $_SESSION['tentativas']++;
+            // Errou: soma uma tentativa
+            $_SESSION['tentativas'] = ($_SESSION['tentativas'] ?? 0) + 1;
 
             if ($_SESSION['tentativas'] >= $maxTentativas) {
                 // Chegou no limite: bloqueia por alguns minutos
                 $_SESSION['bloqueado_ate'] = time() + $minutosBloqueio * 60;
                 $bloqueado = true;
-                $erro = 'Excedeu o número de tentativas. Tente novamente em ' . $minutosBloqueio . ' minuto(s).';
+                $erro = 'Muitas tentativas. Tente novamente em ' . $minutosBloqueio . ' minuto(s).';
             } else {
                 // Mensagem genérica: não revela se o e-mail existe ou não
                 $restantes = $maxTentativas - $_SESSION['tentativas'];
